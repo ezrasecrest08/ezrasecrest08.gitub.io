@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snowboarding at Park City Mountain</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f8fa;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* Real photo background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://www.allseasonsresortlodging.com/wp-content/uploads/2023/11/Chris-Engelsman-Snowboarding-Park-City.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+    }
+
+    /* Lighter gradient — lets the photo breathe */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.05) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.45) 75%,
+        rgba(0,0,0,0.65) 100%
+      );
+    }
+
+    /* Photo credit */
+    .photo-credit {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: .7rem;
+      color: rgba(255,255,255,0.5);
+      z-index: 10;
+    }
+    .photo-credit a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .photo-credit a:hover { color: #fff; }
+
+    /* Hero text */
+    .hero-text {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1rem 3.5rem;
+    }
+    .hero-text h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 4px;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+    .hero-text .sub {
+      font-size: .95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: .5rem;
+    }
+    .hero-cta {
+      margin-top: 1.6rem;
+      display: inline-block;
+      background: #fff;
+      color: #1a1a1a;
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .5px;
+      padding: .75rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .hero-cta:hover { background: #f0f0f0; transform: translateY(-2px); }
+
+    /* ── Content ── */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .72rem;
+      font-weight: 600;
+      color: #888;
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 2px;
+      color: #1a1a1a;
+      margin-bottom: 1.2rem;
+    }
+    .section-title span { color: #2a7fd4; }
+
+    /* Resort link banner */
+    .resort-banner {
+      background: #fff;
+      border: 1px solid #e4e6ea;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .resort-banner-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+    }
+    .resort-banner-info p {
+      color: #777;
+      font-size: .875rem;
+      margin-top: .2rem;
+    }
+    .resort-banner a {
+      background: #1a1a1a;
+      color: #fff;
+      font-weight: 600;
+      font-size: .85rem;
+      padding: .65rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .resort-banner a:hover { background: #333; }
+
+    /* Facts grid */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .fact-card {
+      background: #fff;
+      border: 1px solid #e4e6ea;
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .fact-card:hover {
+      border-color: #2a7fd4;
+      box-shadow: 0 4px 16px rgba(42,127,212,0.1);
+      transform: translateY(-2px);
+    }
+    .fact-icon {
+      font-size: 1.6rem;
+      margin-bottom: .6rem;
+    }
+    .fact-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+      line-height: 1;
+    }
+    .fact-label {
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      margin-top: .2rem;
+    }
+    .fact-desc {
+      font-size: .84rem;
+      color: #555;
+      margin-top: .6rem;
+      line-height: 1.55;
+    }
+
+    /* About blurb */
+    .about-blurb {
+      background: #fff;
+      border-left: 3px solid #2a7fd4;
+      border-radius: 0 10px 10px 0;
+      padding: 1.4rem 1.8rem;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+      color: #444;
+      font-size: .97rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .about-blurb strong { color: #1a1a1a; }
+
+    /* Quick links */
+    .links-section { margin-bottom: 3rem; }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .link-card {
+      background: #fff;
+      border: 1px solid #e4e6ea;
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .link-card:hover {
+      border-color: #2a7fd4;
+      box-shadow: 0 4px 16px rgba(42,127,212,0.1);
+      transform: translateY(-2px);
+    }
+    .link-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #f0f4f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .link-icon.blue  { background: #eaf2fd; }
+    .link-icon.green { background: #edf7f0; }
+    .link-text h3 {
+      font-weight: 600;
+      color: #1a1a1a;
+      font-size: .9rem;
+    }
+    .link-text p {
+      color: #888;
+      font-size: .8rem;
+      margin-top: .15rem;
+    }
+    .link-arrow {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #aaa;
+      font-size: .8rem;
+      border-top: 1px solid #e4e6ea;
+      background: #fff;
+    }
+    footer a { color: #2a7fd4; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Photo credit -->
+    <div class="photo-credit">
+      Photo: <a href="https://www.allseasonsresortlodging.com/blog/the-ultimate-guide-to-snowboarding-in-park-city/" target="_blank" rel="noopener">Chris Engelsman / All Seasons Resort Lodging</a>
+    </div>
+
+    <!-- Hero text -->
+    <div class="hero-text">
+      <p class="sub">Park City, Utah &nbsp;•&nbsp; World-Class Riding</p>
+      <h1>Park City<br>Mountain</h1>
+      <a class="hero-cta" href="https://www.parkcitymountain.com" target="_blank" rel="noopener">Visit Official Site ↗</a>
+    </div>
+  </section>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="content">
+
+    <!-- Resort banner -->
+    <div class="resort-banner">
+      <div class="resort-banner-info">
+        <h2>Park City Mountain Resort</h2>
+        <p>Park City, Utah &nbsp;|&nbsp; Vail Resorts &nbsp;|&nbsp; 7,300+ acres of skiable terrain</p>
+      </div>
+      <a href="https://www.parkcitymountain.com" target="_blank" rel="noopener">Official Website ↗</a>
+    </div>
+
+    <!-- About -->
+    <p class="section-label">About the Resort</p>
+    <h2 class="section-title">America's <span>Largest</span> Ski Resort</h2>
+    <div class="about-blurb">
+      Park City Mountain is Utah's premier snowboarding and skiing destination, located just
+      <strong>30 minutes from Salt Lake City</strong> and its international airport. Situated at
+      an elevation of <strong>10,026 feet</strong> at its summit, the resort receives an average
+      of <strong>355 inches of legendary Utah powder</strong> each season. Since its merger with
+      Canyons Resort in 2015, Park City Mountain became the <strong>largest ski resort in the
+      United States</strong> — offering over 330 trails, 41 lifts, and something for every ability
+      level, from beginner groomers to expert-only chutes and world-class terrain parks.
+    </div>
+
+    <!-- Stats grid -->
+    <p class="section-label">Resort Stats</p>
+    <h2 class="section-title">By The <span>Numbers</span></h2>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-icon">🏔️</div>
+        <div class="fact-value">7,300+</div>
+        <div class="fact-label">Skiable Acres</div>
+        <div class="fact-desc">The most skiable terrain of any resort in the United States.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">❄️</div>
+        <div class="fact-value">355"</div>
+        <div class="fact-label">Avg. Annual Snowfall</div>
+        <div class="fact-desc">Utah's "Greatest Snow on Earth" — famously light and dry powder.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🎿</div>
+        <div class="fact-value">330+</div>
+        <div class="fact-label">Named Trails</div>
+        <div class="fact-desc">Spread across two mountain bases — Park City and Canyons Village.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🚡</div>
+        <div class="fact-value">41</div>
+        <div class="fact-label">Lifts &amp; Gondolas</div>
+        <div class="fact-desc">Including high-speed quads, gondolas, and a mountain connector.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">📐</div>
+        <div class="fact-value">3,000 ft</div>
+        <div class="fact-label">Vertical Drop</div>
+        <div class="fact-desc">From summit at 10,026 ft down to the base at 6,900 ft.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🏂</div>
+        <div class="fact-value">5</div>
+        <div class="fact-label">Terrain Parks</div>
+        <div class="fact-desc">Including the legendary Eagle superpipe and multiple rail gardens.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🌤️</div>
+        <div class="fact-value">300+</div>
+        <div class="fact-label">Sunny Days/Year</div>
+        <div class="fact-desc">Utah's bluebird sky days make for spectacular riding conditions.</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">✈️</div>
+        <div class="fact-value">30 min</div>
+        <div class="fact-label">From SLC Airport</div>
+        <div class="fact-desc">The closest major resort to an international airport in North America.</div>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="links-section">
+      <p class="section-label">Plan Your Trip</p>
+      <h2 class="section-title">Essential <span>Links</span></h2>
+      <div class="links-grid">
+
+        <a class="link-card" href="https://www.parkcitymountain.com/explore-the-resort/mountain-information.aspx" target="_blank" rel="noopener">
+          <div class="link-icon blue">🗺️</div>
+          <div class="link-text">
+            <h3>Mountain Information</h3>
+            <p>Trail maps, terrain overview, and resort details</p>
+          </div>
+          <span class="link-arrow">↗</span>
+        </a>
+
+        <a class="link-card" href="https://www.parkcitymountain.com/plan-your-trip/lift-tickets.aspx" target="_blank" rel="noopener">
+          <div class="link-icon green">🎟️</div>
+          <div class="link-text">
+            <h3>Lift Ticket Prices</h3>
+            <p>Daily tickets, multi-day passes, and Epic Pass info</p>
+          </div>
+          <span class="link-arrow">↗</span>
+        </a>
+
+        <a class="link-card" href="https://www.parkcitymountain.com/plan-your-trip/mountain-conditions.aspx" target="_blank" rel="noopener">
+          <div class="link-icon blue">🌨️</div>
+          <div class="link-text">
+            <h3>Snow Conditions</h3>
+            <p>Current snow report, open runs, and forecasts</p>
+          </div>
+          <span class="link-arrow">↗</span>
+        </a>
+
+        <a class="link-card" href="https://www.epicpass.com/passes/epic-pass.aspx" target="_blank" rel="noopener">
+          <div class="link-icon green">⛷️</div>
+          <div class="link-text">
+            <h3>Epic Pass</h3>
+            <p>Unlimited access to Park City &amp; 40+ global resorts</p>
+          </div>
+          <span class="link-arrow">↗</span>
+        </a>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Fan page for <a href="https://www.parkcitymountain.com" target="_blank" rel="noopener">Park City Mountain Resort</a> &nbsp;|&nbsp; Park City, Utah &nbsp;|&nbsp; Not affiliated with Vail Resorts</p>
+  </footer>
+
+
+</body>
+</html>
